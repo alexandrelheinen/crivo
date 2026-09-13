@@ -50,10 +50,10 @@ check has to be scoped to the element carrying the label.
 
 | ID | Test |
 |---|---|
-| `AC-PROMO-01` | |
-| `AC-PROMO-02` | |
-| `AC-PROMO-03` | |
-| `AC-PROMO-04` | |
+| `AC-PROMO-01` | `matcher.test.js`, `it("matches a card whose marker reads promoted")` |
+| `AC-PROMO-02` | `matcher.test.js`, `it("matches the marker in Portuguese and French")` |
+| `AC-PROMO-03` | `matcher.test.js`, `it("leaves a card with an empty marker alone")` |
+| `AC-PROMO-04` | `matcher.test.js`, `it("ignores marker words appearing in the description")` |
 
 ## Design notes
 
