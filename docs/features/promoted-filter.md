@@ -74,6 +74,9 @@ promoted cards until that language is added.
 - Which additional interface languages to cover. Adding a language is
   cheap, and verifying the marker text in that language requires actually
   switching the interface, which is the part that costs something.
-- Whether LinkedIn exposes a stable attribute on the marker element that
-  would survive a wording change. If one exists, it belongs in the match
-  as a first check with the text list as the fallback.
+
+LinkedIn exposes no attribute that would identify the marker element, so
+the question of using one as a first check is closed. A capture of the
+English interface shows the marker sitting in a `p` element whose class
+list is identical to the paragraphs holding the location and the posting
+age. See [../architecture.md](../architecture.md#selectors).

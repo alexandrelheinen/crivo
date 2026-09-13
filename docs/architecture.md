@@ -127,6 +127,32 @@ Each acceptance criterion names its test in the traceability table of its
 spec. A criterion covering the reader or the observer names the manual
 check instead, and says so.
 
+## Selectors
+
+LinkedIn serves job search from `/jobs/search-results/` and renders it with
+generated class names, so a card carries classes like `_4ad3fe9f` and
+`bde1bb6e` that change between deployments. None of them is a usable hook.
+The cards are not list items either, which rules out the obvious structural
+guess.
+
+Three hooks carry the reader, and they differ in how much weight they hold:
+
+| Target | Selector | Why it holds |
+|---|---|---|
+| List container | `div[data-testid="lazy-column"]` | Named after the component that renders it, `LazyColumn`, so it survives a restyle |
+| Card root | `div[data-testid="lazy-column"] > div[data-display-contents="true"]` | The attribute alone is generic and appears at several depths, and scoping it to a direct child of the container is what makes it a card |
+| Promoted marker | A `p` element inside the card whose own text is the marker word | Nothing else distinguishes it |
+
+The marker paragraph shares its entire class list with the sibling
+paragraphs that carry the location and the posting age, so no class,
+attribute, or position tells them apart. Reading the text of each paragraph
+is the only thing left, which is the observation
+[features/promoted-filter.md](features/promoted-filter.md) turned into
+`AC-PROMO-04`.
+
+Removing the card root removes the whole card, since the anchor wrapping
+the card content sits inside it.
+
 ## Failing visibly
 
 A selector that no longer matches produces an empty result rather than an
