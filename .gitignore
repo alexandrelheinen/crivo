@@ -1,6 +1,9 @@
 node_modules/
 .env
 
+# Console and tooling logs. A LinkedIn console log carries page data.
+*.log
+
 # DOM captures taken from a logged in LinkedIn session. They can carry
 # personal data even after scrubbing, and they are working material rather
 # than part of the extension. Never commit them.
