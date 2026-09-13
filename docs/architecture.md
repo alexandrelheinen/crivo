@@ -21,8 +21,7 @@ artifact and there is nothing to compile.
 ## Manifest
 
 Manifest V3, no `permissions` array, one content script matching
-`https://www.linkedin.com/jobs/*` and `https://www.linkedin.com/feed/*`,
-injected at `document_end`.
+`https://www.linkedin.com/jobs/*`, injected at `document_end`.
 
 The empty permission list is deliberate. A content script already reads
 and modifies the page it runs on, and everything the extension does fits

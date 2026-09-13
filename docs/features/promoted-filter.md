@@ -17,15 +17,14 @@ LinkedIn labels these cards, and the label is the hook the filter uses.
 
 **In scope:**
 
-- Job cards in search results and in the feed that carry a paid placement
-  marker.
+- Job cards in search results that carry a paid placement marker.
 - Matching the marker across the interface languages listed under
   acceptance criteria.
 
 **Out of scope:**
 
-- Sponsored content that is not a job card, including feed posts from
-  advertisers.
+- Sponsored content that is not a job card, and anything rendered on the
+  feed.
 - Distinguishing a promoted listing from an organic one by any signal
   other than the marker LinkedIn renders.
 
@@ -61,6 +60,10 @@ The marker text is localized, so the match is a set of per-language
 strings compared case insensitively: `promoted`, `promovida`, `promovido`,
 `sponsorisée`, `sponsorisé`. Accents are stripped before comparison so
 that a card rendered without them still matches.
+
+Only `promoted` has been read off a real page. The Portuguese and French
+strings ship unverified, and [../decisions.md](../decisions.md) records why
+that beats holding them back.
 
 Matching on text rather than on a class name is a deliberate trade. The
 class name is obfuscated and changes between deployments, while the label

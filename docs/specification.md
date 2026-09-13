@@ -16,6 +16,10 @@ reader's attention, and LinkedIn offers no way to suppress the other two.
 The extension removes them in the browser, so the page the reader scrolls
 holds results they might act on.
 
+The paid share is the larger of the two problems. One search captured in
+September 2026 returned 35 job cards, and 26 of them carried the promoted
+marker, which leaves nine results that ranked on merit.
+
 The second category is a judgment, and the extension makes it explicitly
 rather than pretending to be neutral: the default blocklist targets arms
 manufacturers, military contractors, surveillance vendors, and fossil fuel
@@ -26,8 +30,8 @@ which is why the list is a readable file rather than a compiled artifact.
 
 **In scope:**
 
-- LinkedIn job search pages and the feed, in the browser, for a reader who
-  installed the extension themselves.
+- LinkedIn job search pages, in the browser, for a reader who installed
+  the extension themselves.
 - Removing job cards that carry a paid placement marker.
 - Removing job cards matching a configured set of terms.
 - A blocklist that a reader can edit without a build step.
@@ -43,6 +47,10 @@ which is why the list is a readable file rather than a compiled artifact.
   [decisions.md](decisions.md) records why.
 - Sending anything anywhere. The extension makes no network request and
   collects no data.
+- The LinkedIn feed. Job cards there are rendered by different components
+  than the ones on a job search, and no capture of them exists, so
+  supporting the feed would mean shipping selectors nobody has seen match.
+  [decisions.md](decisions.md) records the trade.
 - Filtering anywhere other than job cards, including messages, search
   results for people, and company pages.
 - Undoing a removal, or showing the reader what was removed.
@@ -55,8 +63,7 @@ cover the extension as a whole.
 - `AC-EXT-01`: When Chrome loads the unpacked extension, the extension
   shall install without requesting any permission.
 - `AC-EXT-02`: When the reader opens any page outside
-  `https://www.linkedin.com/jobs/*` and `https://www.linkedin.com/feed/*`,
-  the extension shall not run.
+  `https://www.linkedin.com/jobs/*`, the extension shall not run.
 - `AC-EXT-03`: When the content script runs, the extension shall make no
   network request.
 - `AC-DOM-01`: When LinkedIn inserts job cards after the initial render,
@@ -75,7 +82,7 @@ cover the extension as a whole.
 | ID | Test |
 |---|---|
 | `AC-EXT-01` | `scripts/validate.sh`, manifest check: no `permissions` key |
-| `AC-EXT-02` | `scripts/validate.sh`, manifest check: `matches` holds only the two LinkedIn patterns |
+| `AC-EXT-02` | `scripts/validate.sh`, manifest check: `matches` holds only the LinkedIn jobs pattern |
 | `AC-EXT-03` | Manual: load a job search with the network panel open, filtered to the extension |
 | `AC-DOM-01` | Manual: scroll a job search past several batches |
 | `AC-DOM-02` | Manual: confirm the matched card is absent from the DOM, not hidden |

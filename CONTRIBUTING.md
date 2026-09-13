@@ -99,7 +99,7 @@ The manual layer is a real page. A green matcher test proves that a string
 matches a pattern, and it says nothing about whether the selector still
 finds the card that LinkedIn rendered this week. Any change touching a
 selector, the observer, or the removal path has to be loaded through
-`chrome://extensions/` and checked against a live job search and feed,
+`chrome://extensions/` and checked against a live job search,
 including one pass with the interface set to a second language.
 
 Do not weaken a gate to get a green run. If a gate is wrong for a specific

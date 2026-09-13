@@ -35,6 +35,36 @@ trade this decision accepts, and it is the constraint the open question
 about per-category toggles in
 [features/blocklist-filter.md](features/blocklist-filter.md) runs into.
 
+## Leave the feed out until a capture of it exists
+
+The content script matches `https://www.linkedin.com/jobs/*` and nothing
+else.
+
+A job card on the feed comes from different components than the ones a job
+search renders, and the selectors recorded in
+[architecture.md](architecture.md#selectors) were read off a search page.
+Matching the feed as well would ship selectors that nobody has watched
+match anything, which is the kind of claim
+[.guidelines/agents/claude.md](../.guidelines/agents/claude.md) rules out.
+
+The cost is that promoted and blocked jobs still reach the reader on the
+feed. Adding it back means capturing a feed card and widening the manifest,
+not writing new logic.
+
+## Ship the Portuguese and French markers unverified
+
+The promoted matcher carries the marker text for English, Portuguese, and
+French, and only the English one has been seen on a real page.
+
+Holding the other two back would mean shipping a filter that breaks the
+moment the reader changes interface language, and the strings cost nothing
+to carry. Both specs say which one is verified, so a failure in Portuguese
+or French is a known risk rather than a surprise.
+
+Verifying one means switching the LinkedIn interface to that language and
+reading the label off a promoted card. Whoever does that removes this
+paragraph's claim about it.
+
 ## Split the matcher into its own file
 
 `matcher.js` holds the pure matching functions and `content.js` holds

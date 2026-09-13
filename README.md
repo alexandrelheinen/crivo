@@ -4,7 +4,7 @@
 
 **CRIVO** (Chrome Remover of Industry and Vendor Offers) is a Chrome
 extension that strips paid placements and unwanted employers out of
-LinkedIn job search and feed pages.
+LinkedIn job search pages.
 
 *Crivo* is Portuguese for a sieve, and *crivar* means to examine something
 closely enough to catch what should not pass. The extension does both: it
@@ -45,7 +45,7 @@ no build step and nothing to compile:
 4. Click **Load unpacked** and select the repository folder.
 
 The extension requests no permissions. It runs a single content script on
-LinkedIn job and feed pages and touches nothing else, which is what keeps
+LinkedIn job pages and touches nothing else, which is what keeps
 the permission list empty.
 
 ## Configure
