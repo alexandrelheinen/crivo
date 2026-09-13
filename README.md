@@ -1,14 +1,20 @@
-# crivo
+# CRIVO
 
-Chrome Remover of Industry and Vendor Offers. A Chrome extension that
-strips paid placements and unwanted employers out of LinkedIn job search
-and feed pages.
+<img src="docs/images/crivo.svg" alt="CRIVO Logo" width="120" align="left">
+
+**CRIVO** (Chrome Remover of Industry and Vendor Offers) is a Chrome
+extension that strips paid placements and unwanted employers out of
+LinkedIn job search and feed pages.
 
 *Crivo* is Portuguese for a sieve, and *crivar* means to examine something
 closely enough to catch what should not pass. The extension does both: it
 reads every job card the page renders and drops the ones that match a
 rule, so the listing that reaches the reader is the one they would have
 been left with after filtering by hand.
+
+<br clear="left">
+
+---
 
 No extension code has landed yet. This repository currently holds the
 specification, the architecture notes, and the project conventions that
@@ -52,6 +58,21 @@ blocking the name hides those roles too. Read
 [docs/features/blocklist-filter.md](docs/features/blocklist-filter.md)
 before adding a term, since it records why each category is on the list
 and which kinds of false positive the current list accepts.
+
+## Icon and color
+
+The mark above is the Material Symbols glyph `no_adult_content`, a crossed
+out circle, filled with `#AB1F3C`. It serves as both the project logo and
+the extension icon, so it is what Chrome shows on `chrome://extensions/`
+and in the toolbar once the extension ships.
+
+`#AB1F3C` is the only color the project uses. Anything that needs a second
+one, should that ever come up, derives it from this red rather than
+introducing an unrelated hue.
+
+Chrome reads the manifest `icons` key as raster images, so shipping the
+icon means rasterizing [docs/images/crivo.svg](docs/images/crivo.svg) to
+the sizes Chrome asks for. Those files do not exist yet.
 
 ## Documentation
 
