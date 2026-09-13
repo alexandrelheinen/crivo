@@ -10,6 +10,7 @@ together.
 manifest.json    Manifest V3 declaration
 content.js       The whole extension: matcher, card reader, observer
 scripts/         Validation entry point and matcher tests
+docs/images/     Source of the icon, as SVG
 ```
 
 Chrome loads the repository folder directly, so the checkout is the
@@ -27,6 +28,13 @@ inside that, so any entry in
 `permissions` would widen what the extension can reach without widening
 what it does. It also keeps the install prompt empty, which matters for
 software a reader is asked to load unpacked from a stranger's repository.
+
+The manifest also carries an `icons` map, which Chrome reads as raster
+images at 16, 32, 48, and 128 pixels. The source of truth for the mark is
+[images/crivo.svg](images/crivo.svg), the Material Symbols glyph
+`no_adult_content` filled with the project color `#AB1F3C`, so the PNG
+sizes are generated from that file rather than drawn separately. Anything
+that renders the mark uses the same color, since the project has only one.
 
 ## Three parts, one file
 
