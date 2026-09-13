@@ -74,17 +74,19 @@ cover the extension as a whole.
 
 | ID | Test |
 |---|---|
-| `AC-EXT-01` | |
-| `AC-EXT-02` | |
-| `AC-EXT-03` | |
-| `AC-DOM-01` | |
-| `AC-DOM-02` | |
-| `AC-DOM-03` | |
-| `AC-DOM-04` | |
+| `AC-EXT-01` | `scripts/validate.sh`, manifest check: no `permissions` key |
+| `AC-EXT-02` | `scripts/validate.sh`, manifest check: `matches` holds only the two LinkedIn patterns |
+| `AC-EXT-03` | Manual: load a job search with the network panel open, filtered to the extension |
+| `AC-DOM-01` | Manual: scroll a job search past several batches |
+| `AC-DOM-02` | Manual: confirm the matched card is absent from the DOM, not hidden |
+| `AC-DOM-03` | Manual: scroll past a removal, and confirm the console is clean |
+| `AC-DOM-04` | Manual: load a search with no promoted and no blocked card |
 
-Filling this table is part of the implementation work, not a separate
-task. A criterion with no test against it is unverified regardless of how
-obvious it looks.
+Most of these fall to the manual check because they are claims about a
+real page rather than about a string. See
+[architecture.md](architecture.md#verification-plan) for why the reader and
+the observer are verified by hand, and the two filter specs for the
+criteria that the matcher tests cover.
 
 ## Constraints
 

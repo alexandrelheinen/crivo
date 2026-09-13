@@ -13,6 +13,7 @@ agent is not exempt from specs, tests, or review.
 | [docs/specification.md](docs/specification.md) | Functional spec and acceptance criteria |
 | [docs/architecture.md](docs/architecture.md) | Manifest V3 structure, DOM observation, selector strategy |
 | [docs/decisions.md](docs/decisions.md) | Log of decisions that changed or loosened a constraint |
+| [CHANGELOG.md](CHANGELOG.md) | What each released version changed |
 | [.guidelines/](.guidelines/) | Shared engineering guidelines, consumed as a submodule |
 
 Do not duplicate a rule across these files. `CLAUDE.md` and `AGENTS.md` are
@@ -63,14 +64,36 @@ have disappeared. See
 Rebase and merge, keeping history linear. The owner approves and merges;
 agents do not.
 
+### Versioning
+
+The `version` field in `manifest.json` is the release number, and
+[CHANGELOG.md](CHANGELOG.md) records what each one changed. Chrome shows
+that number on `chrome://extensions/`, which makes it the only version a
+reader ever sees, so nothing else in the repository carries a second one.
+
+Semantic versioning, read against what a reader installing the extension
+would notice: a patch fixes a selector or a false positive, a minor adds a
+filter or a term, and a major changes what the extension removes by
+default. The number stays below `1.0.0` until the extension has filtered a
+live page.
+
 ## Validation
 
 Two layers, and neither substitutes for the other.
 
 The automated layer is `scripts/validate.sh`, which the first
-implementation pull request adds. It runs the matcher tests under Node and
-validates `manifest.json` against the Manifest V3 schema. It runs no
-browser.
+implementation pull request adds. It runs the matcher tests under
+`node:test` with Node's own coverage flag, gated at 90% of lines and
+branches in `matcher.js`, then checks `manifest.json` for the keys
+Manifest V3 requires. It runs no browser and installs nothing, so the
+repository carries no `package.json` and no lockfile.
+
+```bash
+./scripts/validate.sh
+```
+
+A GitHub Actions workflow runs that same script on every pull request.
+Run it locally before pushing rather than discovering a failure in CI.
 
 The manual layer is a real page. A green matcher test proves that a string
 matches a pattern, and it says nothing about whether the selector still

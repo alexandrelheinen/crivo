@@ -62,11 +62,11 @@ boundaries is what separates the filter from a keyword sledgehammer.
 
 | ID | Test |
 |---|---|
-| `AC-BLOCK-01` | |
-| `AC-BLOCK-02` | |
-| `AC-BLOCK-03` | |
-| `AC-BLOCK-04` | |
-| `AC-BLOCK-05` | |
+| `AC-BLOCK-01` | `matcher.test.js`, `it("matches a blocked company name")` |
+| `AC-BLOCK-02` | `matcher.test.js`, `it("matches a domain term in the title")` |
+| `AC-BLOCK-03` | `matcher.test.js`, `it("leaves total compensation and NVIDIA RTX alone")` |
+| `AC-BLOCK-04` | `matcher.test.js`, `it("matches regardless of accents on either side")` |
+| `AC-BLOCK-05` | Manual: edit the list, reload from `chrome://extensions/`, reload a job search |
 
 ## The list
 
@@ -132,7 +132,8 @@ punctuation.
   title is worth the false positives. A description mentioning defense
   once is weaker evidence than a title, and the card's description is
   truncated anyway.
-- Whether an employer whose defense work is a minority of its business
-  belongs on a list that removes all of its listings. The staffing row
-  already answers this one way, and the answer deserves a line in
-  [../decisions.md](../decisions.md) if it changes.
+
+Whether an employer whose defense work is a minority of its business
+belongs on a list that removes all of its listings is settled for the
+default, in [../decisions.md](../decisions.md). Reopening it means editing
+that entry rather than this list.
