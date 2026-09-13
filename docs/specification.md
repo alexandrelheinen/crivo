@@ -81,8 +81,8 @@ cover the extension as a whole.
 
 | ID | Test |
 |---|---|
-| `AC-EXT-01` | `scripts/validate.sh`, manifest check: no `permissions` key |
-| `AC-EXT-02` | `scripts/validate.sh`, manifest check: `matches` holds only the LinkedIn jobs pattern |
+| `AC-EXT-01` | `scripts/check-manifest.js`, `no permission is requested` |
+| `AC-EXT-02` | `scripts/check-manifest.js`, `the content script matches LinkedIn jobs only` |
 | `AC-EXT-03` | Manual: load a job search with the network panel open, filtered to the extension |
 | `AC-DOM-01` | Manual: scroll a job search past several batches |
 | `AC-DOM-02` | Manual: confirm the matched card is absent from the DOM, not hidden |
