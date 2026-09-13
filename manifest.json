@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "crivo",
+  "version": "0.1.0",
+  "description": "Removes promoted listings and blocked employers from LinkedIn job search.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/jobs/*"],
+      "js": ["matcher.js", "content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
