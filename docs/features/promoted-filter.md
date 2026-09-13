@@ -1,0 +1,79 @@
+# Spec for the promoted filter
+
+Status: draft
+
+Removes job cards that LinkedIn marks as a paid placement. See
+[../specification.md](../specification.md) for the constraints and design
+notes shared with the blocklist filter.
+
+## Intent
+
+A promoted card is an advertisement wearing the layout of a search result.
+It ranks because an employer paid for the slot rather than because it
+matches the query, so it costs the reader attention without earning it.
+LinkedIn labels these cards, and the label is the hook the filter uses.
+
+## Scope
+
+**In scope:**
+
+- Job cards in search results and in the feed that carry a paid placement
+  marker.
+- Matching the marker across the interface languages listed under
+  acceptance criteria.
+
+**Out of scope:**
+
+- Sponsored content that is not a job card, including feed posts from
+  advertisers.
+- Distinguishing a promoted listing from an organic one by any signal
+  other than the marker LinkedIn renders.
+
+## Acceptance criteria
+
+- `AC-PROMO-01`: When a job card carries a paid placement marker, the
+  extension shall remove the card.
+- `AC-PROMO-02`: When the interface language is English, Portuguese, or
+  French, the extension shall recognize that language's marker text.
+- `AC-PROMO-03`: When a job card carries no paid placement marker, the
+  extension shall leave the card in place.
+- `AC-PROMO-04`: When a job description contains a word matching the
+  marker text in its body copy rather than in the marker element, the
+  extension shall leave the card in place.
+
+`AC-PROMO-04` is the criterion that decides how the marker is read. A
+substring search over the whole card text matches a description mentioning
+a promotion or a promoted role, and removes a legitimate listing. The
+check has to be scoped to the element carrying the label.
+
+## Traceability
+
+| ID | Test |
+|---|---|
+| `AC-PROMO-01` | |
+| `AC-PROMO-02` | |
+| `AC-PROMO-03` | |
+| `AC-PROMO-04` | |
+
+## Design notes
+
+The marker text is localized, so the match is a set of per-language
+strings compared case insensitively: `promoted`, `promovida`, `promovido`,
+`sponsorisée`, `sponsorisé`. Accents are stripped before comparison so
+that a card rendered without them still matches.
+
+Matching on text rather than on a class name is a deliberate trade. The
+class name is obfuscated and changes between deployments, while the label
+is user-visible and changes only when LinkedIn changes its wording, which
+is rarer. The cost is that the language list is incomplete by
+construction, and a reader using an unlisted interface language sees
+promoted cards until that language is added.
+
+## Open questions
+
+- Which additional interface languages to cover. Adding a language is
+  cheap, and verifying the marker text in that language requires actually
+  switching the interface, which is the part that costs something.
+- Whether LinkedIn exposes a stable attribute on the marker element that
+  would survive a wording change. If one exists, it belongs in the match
+  as a first check with the text list as the fallback.
