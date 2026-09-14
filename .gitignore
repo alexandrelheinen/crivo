@@ -7,7 +7,7 @@ node_modules/
 # DOM captures taken from a logged in LinkedIn session. They can carry
 # personal data even after scrubbing, and they are working material rather
 # than part of the extension. Never commit them.
-_captures/
+captures/
 
 # Agent worktrees (isolated checkouts; never part of the repo).
 .claude/worktrees/
